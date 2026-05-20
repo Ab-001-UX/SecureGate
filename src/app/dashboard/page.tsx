@@ -35,7 +35,7 @@ export default async function DashboardPage() {
             <Mail size={16} style={{ color: "var(--text-muted)" }} />
             <div>
               <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Registered Email</div>
-              <div style={{ fontSize: "15px", fontWeight: 600, color: "#ffffff" }}>{session.user.email}</div>
+              <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--accent)" }}>{session.user.email}</div>
             </div>
           </div>
 
