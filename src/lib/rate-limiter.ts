@@ -1,8 +1,23 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
-const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
-const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+let redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim() || "";
+let redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim() || "";
+
+// Automatically sanitize if the user accidentally pasted the variable name or quotes into the Vercel dashboard
+if (redisUrl) {
+  redisUrl = redisUrl.replace(/^['"]|['"]$/g, "");
+  if (redisUrl.startsWith("UPSTASH_REDIS_REST_URL=")) {
+    redisUrl = redisUrl.substring("UPSTASH_REDIS_REST_URL=".length).replace(/^['"]|['"]$/g, "");
+  }
+}
+
+if (redisToken) {
+  redisToken = redisToken.replace(/^['"]|['"]$/g, "");
+  if (redisToken.startsWith("UPSTASH_REDIS_REST_TOKEN=")) {
+    redisToken = redisToken.substring("UPSTASH_REDIS_REST_TOKEN=".length).replace(/^['"]|['"]$/g, "");
+  }
+}
 
 let redis: Redis | null = null;
 let loginRateLimiter: Ratelimit | null = null;
