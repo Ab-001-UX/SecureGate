@@ -3,6 +3,8 @@ import { authOptions } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited } from "@/lib/rate-limiter";
 
+export const dynamic = "force-dynamic";
+
 const handler = NextAuth(authOptions);
 
 export async function POST(request: NextRequest, context: any) {
