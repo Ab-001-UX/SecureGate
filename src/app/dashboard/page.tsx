@@ -26,7 +26,7 @@ export default async function DashboardPage() {
           Identity verified. You are successfully authenticated within the gateway.
         </p>
 
-        <div style={{ textAlign: "left", border: "1px solid var(--border-color)", borderRadius: "8px", padding: "20px", marginBottom: "32px", backgroundColor: "#14161b" }} id="profile-container">
+        <div style={{ textAlign: "left", border: "1px solid var(--border-color)", borderRadius: "8px", padding: "20px", marginBottom: "32px", backgroundColor: "var(--card-bg, #1e2128)" }} id="profile-container">
           <h2 style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "16px" }}>
             Identity Profile
           </h2>
@@ -35,7 +35,7 @@ export default async function DashboardPage() {
             <Mail size={16} style={{ color: "var(--text-muted)" }} />
             <div>
               <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Registered Email</div>
-              <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>{session.user.email}</div>
+              <div style={{ fontSize: "15px", fontWeight: 600, color: "#ffffff" }}>{session.user.email}</div>
             </div>
           </div>
 
