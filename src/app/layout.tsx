@@ -46,11 +46,8 @@ export default async function RootLayout({
                   </>
                 ) : (
                   <>
-                    <Link href="/auth/login" className="nav-link" id="nav-link-login">
-                      Login
-                    </Link>
-                    <Link href="/auth/register" className="btn btn-primary" style={{ padding: "8px 16px", fontSize: "14px" }} id="nav-btn-signup">
-                      Sign Up
+                    <Link href="/" className="nav-link" id="nav-link-home">
+                      Home
                     </Link>
                   </>
                 )}

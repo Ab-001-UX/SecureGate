@@ -262,10 +262,10 @@ export default function RegisterPage() {
               {loading ? (
                 <>
                   <span className="spinner" style={{ marginRight: "8px" }} />
-                  Creating Profile...
+                  Creating Account...
                 </>
               ) : (
-                "Establish Profile"
+                "Create Account"
               )}
             </button>
           </form>
