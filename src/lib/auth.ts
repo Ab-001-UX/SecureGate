@@ -24,13 +24,13 @@ export const authOptions: NextAuthOptions = {
 
         const limited = await isRateLimited(ip, "login");
         if (limited) {
-          throw new Error("RATE_LIMIT_EXCEEDED");
+          return { id: "error", error: "RATE_LIMIT_EXCEEDED" } as any;
         }
 
         // 2. Zod schema validation
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) {
-          throw new Error("INVALID_INPUTS");
+          return { id: "error", error: "INVALID_INPUTS" } as any;
         }
 
         const { email, password } = parsed.data;
@@ -42,17 +42,17 @@ export const authOptions: NextAuthOptions = {
 
         // 4. Verify user and password
         if (!user || !user.password) {
-          throw new Error("EMAIL_NOT_FOUND");
+          return { id: "error", error: "EMAIL_NOT_FOUND" } as any;
         }
 
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!passwordsMatch) {
-          throw new Error("INCORRECT_PASSWORD");
+          return { id: "error", error: "INCORRECT_PASSWORD" } as any;
         }
 
         // 5. Verification Check
         if (!user.emailVerified) {
-          throw new Error("EMAIL_UNVERIFIED");
+          return { id: "error", error: "EMAIL_UNVERIFIED" } as any;
         }
 
         return {
@@ -65,6 +65,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      if (user && "error" in user) {
+        throw new Error((user as any).error);
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
