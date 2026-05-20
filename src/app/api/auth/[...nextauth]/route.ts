@@ -5,8 +5,6 @@ import { isRateLimited } from "@/lib/rate-limiter";
 
 export const dynamic = "force-dynamic";
 
-const handler = NextAuth(authOptions);
-
 export async function POST(request: NextRequest, context: any) {
   const xForwardedFor = request.headers.get("x-forwarded-for");
   const ip = xForwardedFor ? xForwardedFor.split(",")[0].trim() : "127.0.0.1";
@@ -23,9 +21,9 @@ export async function POST(request: NextRequest, context: any) {
     }
   }
 
-  return handler(request, context);
+  return NextAuth(authOptions)(request, context);
 }
 
 export async function GET(request: NextRequest, context: any) {
-  return handler(request, context);
+  return NextAuth(authOptions)(request, context);
 }
