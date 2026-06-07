@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ShieldAlert, ShieldCheck, Loader2, Mail, ArrowRight } from "lucide-react";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
 export default function VerifyEmailPage({ params }: PageProps) {
   const router = useRouter();
-  const token = params.token;
+  const { token } = use(params);
   
   const [verifying, setVerifying] = useState(true);
   const [error, setError] = useState<string | null>(null);

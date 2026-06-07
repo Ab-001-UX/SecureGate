@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ShieldCheck, ShieldAlert, Check, X, Shield, Eye, EyeOff } from "lucide-react";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
 export default function ResetPasswordPage({ params }: PageProps) {
   const router = useRouter();
-  const token = params.token;
+  const { token } = use(params);
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
